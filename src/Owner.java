@@ -1,4 +1,7 @@
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Owner {
@@ -232,7 +235,84 @@ public class Owner {
      * @throws SQLException
      */
     private void displayReport() throws SQLException {
-        Statement stmt = conn.createStatement();
+        System.out.println("Which kind of sale report do you want to see? [total / genre / author]");
+        String kind = scanner.next();
 
+        if(!kind.equals("total")&&!kind.equals("genre")&&!kind.equals("author")){
+            System.out.println("Cannot recognize your report type. Retry it later.");
+            return;
+        }else {
+            String startDate, endDate;
+            while (true) {
+                System.out.println("Please enter the start date (format: [yyyy-MM-dd]): ");
+                startDate = scanner.next();
+                System.out.println("Please enter the end date (format: [yyyy-MM-dd]): ");
+                endDate = scanner.next();
+                if (isValidDate(startDate) && isValidDate(endDate)) break;
+                else System.out.println("Error input date. Double check your date format and value.");
+            }
+
+            if (kind.equals("total")) {
+                displayTotalSale(startDate,endDate);
+            } else if (kind.equals("genre")) {
+                displayGenreSale(startDate,endDate);
+            } else if (kind.equals("author")) {
+                displayAuthorSale(startDate,endDate);
+            }
+        }
+
+    }
+
+    private void displayTotalSale(String startDate, String endDate) throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rset = stmt.executeQuery(
+                "select count(*) as amount, sum(copies * price) as sum_price from sales where date between '"+startDate+"' and '"+endDate+"'"
+        );
+        rset.next();
+        System.out.println("\nIn the period between "+startDate+" and "+endDate+", there are "+rset.getString("amount")+" books sold for "+rset.getInt("sum_price")+" dollars.\n");
+    }
+
+    private void displayGenreSale(String startDate, String endDate) throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rset = stmt.executeQuery(
+                "select genre, count(*), sum(copies * price) as sum_price\n" +
+                        "from sales\n" +
+                        "where date between '"+startDate+"' and '"+endDate+"'\n" +
+                        "group by genre"
+        );
+        System.out.println("\nIn the period between "+startDate+" and "+endDate+", the sale information by genre as follows");
+        System.out.println("Genre\t\tSold Amount\t\tIncome");
+        while(rset.next()){
+            System.out.println(rset.getString("genre")+"\t\t"+rset.getInt("count")+"\t\t\t"+rset.getInt("sum_price"));
+        }
+        System.out.println();
+    }
+
+    private void displayAuthorSale(String startDate, String endDate) throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rset = stmt.executeQuery(
+                "select author, count(*), sum(copies * price) as sum_price\n" +
+                        "from sales\n" +
+                        "where date between '"+startDate+"' and '"+endDate+"'\n" +
+                        "group by author"
+        );
+        System.out.println("\nIn the period between "+startDate+" and "+endDate+", the sale information by genre as follows");
+        System.out.println("Author\t\t\t\tSold Amount\t\tIncome");
+        while(rset.next()){
+            System.out.println(rset.getString("author")+"\t\t\t"+rset.getInt("count")+"\t\t\t"+rset.getInt("sum_price"));
+        }
+        System.out.println();
+    }
+
+
+    private boolean isValidDate(String dateStr) {
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dateStr);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
     }
 }
