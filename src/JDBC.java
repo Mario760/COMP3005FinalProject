@@ -18,7 +18,7 @@ public class JDBC {
         System.out.println("Please enter you information:");
         do {
             System.out.print("Username (<20 characters):");
-            name = scanner.next();
+            name = scanner.nextLine();
             if(name.length()>20){
                 System.out.println("Invalid input(>20 characters), please limit your username and try again.");
             }
@@ -29,10 +29,10 @@ public class JDBC {
             }
         }while (true);
         System.out.print("Password (<20 characters):");
-        password = scanner.next();
+        password = scanner.nextLine();
         do {
             System.out.print("Phone Number (<20 digits):");
-            contactNumber = scanner.next();
+            contactNumber = scanner.nextLine();
             if(!isNumeric(contactNumber) || contactNumber.length()>20){
                 System.out.println("Please enter the phone number in correct format!");
             }else break;
@@ -53,7 +53,7 @@ public class JDBC {
         System.out.println("Please enter address information:");
         while (true){
             System.out.print("Postal Code:");
-            postal_code = scanner.next();
+            postal_code = scanner.nextLine();
             if(postal_code.length()>6){
                 System.out.println("Invalid postal code,check your address info and try again.");
             }else{
@@ -63,7 +63,7 @@ public class JDBC {
 
         while (true){
             System.out.print("Street Number (<4 numbers):");
-            street_no = scanner.next();
+            street_no = scanner.nextLine();
             if(street_no.length()>4){
                 System.out.println("Invalid street number,check your address info and try again.");
             }else{
@@ -74,7 +74,7 @@ public class JDBC {
 
         while (true){
             System.out.print("Street Name (< 20 characters):");
-            street_name = scanner.next();
+            street_name = scanner.nextLine();
             if(street_name.length()>20){
                 System.out.println("Invalid street name, check your address info and try again.");
             }else{
@@ -84,7 +84,7 @@ public class JDBC {
 
         while (true){
             System.out.print("City (< 20 characters):");
-            city = scanner.next();
+            city = scanner.nextLine();
             if(city.length()>20){
                 System.out.println("Invalid city, check your address info and try again.");
             }else{
@@ -94,7 +94,7 @@ public class JDBC {
 
         while (true){
             System.out.print("Province (< 20 characters):");
-            province = scanner.next();
+            province = scanner.nextLine();
             if(province.length()>20){
                 System.out.println("Invalid province, check your address info and try again.");
             }else{
@@ -104,7 +104,7 @@ public class JDBC {
 
         while (true){
             System.out.print("Country (< 20 characters):");
-            country = scanner.next();
+            country = scanner.nextLine();
             if(country.length()>20){
                 System.out.println("Invalid country, check your address info and try again.");
             }else{
@@ -129,7 +129,7 @@ public class JDBC {
         System.out.println("Please enter you information:");
         do {
             System.out.print("Username (<20 characters):");
-            name = scanner.next();
+            name = scanner.nextLine();
             if(name.length()>20){
                 System.out.println("Invalid input(>20 characters), please limit your username and try again.");
             }
@@ -143,7 +143,7 @@ public class JDBC {
 
         HashMap<String,String>userInfo = getUserInfo(name);
         System.out.print("Password (<20 characters):");
-        password = scanner.next();
+        password = scanner.nextLine();
         if(password.equals(userInfo.get("password"))) {
             if (userInfo.get("contact_number") == null) {
                 Owner owner = new Owner(userInfo.get("id"), userInfo.get("name"), userInfo.get("password"),conn);
@@ -208,7 +208,7 @@ public class JDBC {
             label:
             while(true){
                 System.out.println("Main page: Please enter your operation [Register / Login / Exit]:");
-                inputOperation = scanner.next();
+                inputOperation = scanner.nextLine();
                 switch (inputOperation) {
                     case "Register":
                         register();

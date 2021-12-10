@@ -18,7 +18,7 @@ public class Owner {
     public void operationMenu() throws SQLException {
         while(true) {
             System.out.println("Owner page: Please enter your operation [Add books / Remove books / Display reports / Log out]:");
-            String inputOperation = scanner.next();
+            String inputOperation = scanner.nextLine();
             if(inputOperation.equals("Add books")){
                 addBooks();
             }else if(inputOperation.equals("Remove books")){
@@ -50,42 +50,42 @@ public class Owner {
         }
         System.out.println("-------------------------------------------------------------");
         System.out.print("Please type the publisher of the new book: ");
-        String publisher = scanner.next();
+        String publisher = scanner.nextLine();
         if(!checkPublisherExist(publisher)){
             addNewPublisher(publisher);
         }
 
         do {
             System.out.println("Enter the ISBN-13 of the new book: ");
-            ISBN = scanner.next();
+            ISBN = scanner.nextLine();
             if(!JDBC.isNumeric(ISBN) || ISBN.length()!=13) System.out.println("Please check and enter the correct ISBN.");
             else break;
         }while(true);
 
         do {
             System.out.print("Enter the name of the new book (<20 characters): ");
-            name = scanner.next();
+            name = scanner.nextLine();
             if(name.length()>20) System.out.println("Please check and enter the correct ISBN.");
             else break;
         }while(true);
 
         do {
             System.out.print("Enter the author of the new book (<20 characters): ");
-            author = scanner.next();
+            author = scanner.nextLine();
             if(author.length()>20) System.out.println("Please check and enter the correct author.");
             else break;
         }while(true);
 
         do {
             System.out.print("Enter the genre of the new book (<20 characters): ");
-            genre = scanner.next();
+            genre = scanner.nextLine();
             if(genre.length()>20) System.out.println("Please check and enter the correct genre.");
             else break;
         }while(true);
 
         do {
             System.out.print("Enter the total pages of the new book (<4 digits): ");
-            number_of_pages = scanner.next();
+            number_of_pages = scanner.nextLine();
             if(number_of_pages.length()>4||!JDBC.isNumeric(number_of_pages)){
                 System.out.println("Please check and enter the correct pages number.");
             }
@@ -97,7 +97,7 @@ public class Owner {
 
         while(true){
             System.out.print("Enter the price of the new book (<4 digits): ");
-            price = scanner.next();
+            price = scanner.nextLine();
             if(price.length()>4||!JDBC.isNumeric(price)){
                 System.out.println("Please check and enter the correct price.");
             }
@@ -109,7 +109,7 @@ public class Owner {
 
         while (true) {
             System.out.print("How many copies of the new book do you want to add? (<2 digits): ");
-            copies_amount = scanner.next();
+            copies_amount = scanner.nextLine();
             if(copies_amount.length()>2||!JDBC.isNumeric(copies_amount)){
                 System.out.println("Please check and enter the correct copies amount.");
             }
@@ -121,7 +121,7 @@ public class Owner {
 
         while(true){
             System.out.print("What is the sale rate of the new book? (0 < rate < 99): ");
-            sale_rate = scanner.next();
+            sale_rate = scanner.nextLine();
             if(sale_rate.length()>2||!JDBC.isNumeric(sale_rate)){
                 System.out.println("Please check and enter the correct sale rate.");
             } else{
@@ -153,13 +153,13 @@ public class Owner {
 
         do {
             System.out.print("Please type the new publisher's email (<50 characters):");
-            email = scanner.next();
+            email = scanner.nextLine();
             if(email.length()>50 || email.length()==0) System.out.println("Input length error, try it again!");
         }while(email.length()<=50 && email.length()>0);
 
         do {
             System.out.print("Please type the new publisher's phone_number' (<20 digits):");
-            phone_number = scanner.next();
+            phone_number = scanner.nextLine();
             if(phone_number.length()>20 || phone_number.length()==0) System.out.println("Input length error, try it again!");
             else if(!JDBC.isNumeric(phone_number))System.out.println("Error format for phone number, check and try it again!");
             else break;
@@ -167,7 +167,7 @@ public class Owner {
 
         do {
             System.out.print("Please type the new publisher's banking account'(<20 characters):");
-            banking_account = scanner.next();
+            banking_account = scanner.nextLine();
             if(banking_account.length()>20 || banking_account.length()==0) System.out.println("Input length error, try it again!");
         }while(banking_account.length()<=20 && banking_account.length()>0);
 
@@ -216,7 +216,7 @@ public class Owner {
 
         while(true) {
             System.out.print("Please type ISBN of the book that you want to remove:");
-            ISBN = scanner.next();
+            ISBN = scanner.nextLine();
             if(checkBookExist(ISBN)){
                break;
             }
@@ -236,7 +236,7 @@ public class Owner {
      */
     private void displayReport() throws SQLException {
         System.out.println("Which kind of sale report do you want to see? [total / genre / author]");
-        String kind = scanner.next();
+        String kind = scanner.nextLine();
 
         if(!kind.equals("total")&&!kind.equals("genre")&&!kind.equals("author")){
             System.out.println("Cannot recognize your report type. Retry it later.");
@@ -245,9 +245,9 @@ public class Owner {
             String startDate, endDate;
             while (true) {
                 System.out.println("Please enter the start date (format: [yyyy-MM-dd]): ");
-                startDate = scanner.next();
+                startDate = scanner.nextLine();
                 System.out.println("Please enter the end date (format: [yyyy-MM-dd]): ");
-                endDate = scanner.next();
+                endDate = scanner.nextLine();
                 if (isValidDate(startDate) && isValidDate(endDate)) break;
                 else System.out.println("Error input date. Double check your date format and value.");
             }

@@ -41,7 +41,7 @@ public class Customer {
     public void operationMenu() throws SQLException {
         while(true) {
             System.out.println("Customer page: Please enter your operation [Search books / Browse books / Select books / Check out / Tracking order / Log out]:");
-            String inputOperation = scanner.next();
+            String inputOperation = scanner.nextLine();
             if(inputOperation.equals("Search books")){
                 searchBooks();
             }else if(inputOperation.equals("Browse books")){
@@ -74,7 +74,7 @@ public class Customer {
         //get filter input from user
         while(true) {
             System.out.println("Which filter do you want to add to search books? (Type \"END\" to stop adding filter) [ISBN / name / author / genre]:");
-            filter = scanner.next();
+            filter = scanner.nextLine();
 
             if(filter.equals("END")) {
                 if (isISBN || isName || isAuthor || isGenre) {
@@ -94,7 +94,7 @@ public class Customer {
                         System.out.println("Sorry you have entered ISBN already.");
                     }else {
                         System.out.println("Please enter your desired ISBN: ");
-                        ISBN = scanner.next();
+                        ISBN = scanner.nextLine();
                         sql += "ISBN = '" + ISBN + "' ";
                         isISBN = true;
                     }
@@ -104,7 +104,7 @@ public class Customer {
                         System.out.println("Sorry you have entered name already.");
                     }else {
                         System.out.println("Please enter your desired book name: ");
-                        bookName = scanner.next();
+                        bookName = scanner.nextLine();
                         sql += "name = '" + bookName + "' ";
                         isISBN = true;
                     }
@@ -114,7 +114,7 @@ public class Customer {
                         System.out.println("Sorry you have entered author already.");
                     }else {
                         System.out.println("Please enter your desired author name: ");
-                        author = scanner.next();
+                        author = scanner.nextLine();
                         sql += "author = '" + author + "' ";
                         isAuthor = true;
                     }
@@ -124,7 +124,7 @@ public class Customer {
                         System.out.println("Sorry you have entered genre already.");
                     }else {
                         System.out.println("Please enter your desired genre: ");
-                        genre = scanner.next();
+                        genre = scanner.nextLine();
                         sql += "genre = '" + genre + "' ";
                         isGenre = true;
                     }
@@ -193,7 +193,7 @@ public class Customer {
         //get ISBN from user to add books into the basket
         while(true) {
             System.out.println("Enter the book's ISBN that you want to select (type END to finisher selection): ");
-            ISBN = scanner.next();
+            ISBN = scanner.nextLine();
             if (ISBN.equals("END")) {
                 break;
             }
@@ -202,7 +202,7 @@ public class Customer {
                     int totalCopies = getCopiesAmount(ISBN);
                     while (true) {
                         System.out.println("There are " + totalCopies + " in stock. How many copies do you want?: ");
-                        copies = scanner.next();
+                        copies = scanner.nextLine();
                         if (JDBC.isNumeric(copies)) {
                             if (Integer.parseInt(copies) <= totalCopies) {
                                 break;
@@ -220,7 +220,7 @@ public class Customer {
                         int totalCopies = getCopiesAmount(ISBN);
                         while (true) {
                             System.out.println("There are " + totalCopies + " in stock. How many copies do you want?: ");
-                            copies = scanner.next();
+                            copies = scanner.nextLine();
                             if (JDBC.isNumeric(copies)) {
                                 if (Integer.parseInt(copies) <= totalCopies) {
                                     break;
@@ -266,7 +266,7 @@ public class Customer {
 
         while(true) {
             System.out.println("Please enter the biller's name (<20 characters):");
-            biller_name = scanner.next();
+            biller_name = scanner.nextLine();
             if(biller_name.length()<=20){
                 break;
             }
@@ -304,7 +304,7 @@ public class Customer {
 
         System.out.println("Shipping address same as the register address? [Yes / No]");
 
-        String sameAddress = scanner.next();
+        String sameAddress = scanner.nextLine();;
         while(true) {
             if (sameAddress.equals("No")) {
                 newShippingAddress(orderNumber);
@@ -387,7 +387,7 @@ public class Customer {
 
         while(true) {
             System.out.println("Please enter the order number that you want to track:");
-            order_number = scanner.next();
+            order_number = scanner.nextLine();
             if (orderNumberList.containsKey(order_number)) break;
             System.out.println("Order number not exit, please check and enter again.");
         }
@@ -430,7 +430,7 @@ public class Customer {
         System.out.println("Please enter address information:");
         while (true){
             System.out.print("Postal Code:");
-            postal_code = scanner.next();
+            postal_code = scanner.nextLine();
             if(postal_code.length()>6){
                 System.out.println("Invalid postal code,check your address info and try again.");
             }else{
@@ -440,7 +440,7 @@ public class Customer {
 
         while (true){
             System.out.print("Street Number (<4 numbers):");
-            street_no = scanner.next();
+            street_no = scanner.nextLine();
             if(street_no.length()>4){
                 System.out.println("Invalid street number,check your address info and try again.");
             }else{
@@ -451,7 +451,7 @@ public class Customer {
 
         while (true){
             System.out.print("Street Name (< 20 characters):");
-            street_name = scanner.next();
+            street_name = scanner.nextLine();
             if(street_name.length()>20){
                 System.out.println("Invalid street name, check your address info and try again.");
             }else{
@@ -461,7 +461,7 @@ public class Customer {
 
         while (true){
             System.out.print("City (< 20 characters):");
-            city = scanner.next();
+            city = scanner.nextLine();
             if(city.length()>20){
                 System.out.println("Invalid city, check your address info and try again.");
             }else{
@@ -471,7 +471,7 @@ public class Customer {
 
         while (true){
             System.out.print("Province (< 20 characters):");
-            province = scanner.next();
+            province = scanner.nextLine();
             if(province.length()>20){
                 System.out.println("Invalid province, check your address info and try again.");
             }else{
@@ -481,7 +481,7 @@ public class Customer {
 
         while (true){
             System.out.print("Country (< 20 characters):");
-            country = scanner.next();
+            country = scanner.nextLine();
             if(country.length()>20){
                 System.out.println("Invalid country, check your address info and try again.");
             }else{
