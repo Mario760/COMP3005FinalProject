@@ -46,7 +46,7 @@ public class JDBC {
     }
 
 
-    private static void registerAddress(String username) throws SQLException {
+    public static void registerAddress(String username) throws SQLException {
         Statement stmt = conn.createStatement();
         String postal_code, street_no,street_name, city,province, country, userID;
         int streetNo;

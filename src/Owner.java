@@ -174,6 +174,12 @@ public class Owner {
         );
     }
 
+    /**
+     * Check whether publisher exist in the database
+     * @param publisherName
+     * @return
+     * @throws SQLException
+     */
     private boolean checkPublisherExist(String publisherName) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rset = stmt.executeQuery(
@@ -220,7 +226,13 @@ public class Owner {
         System.out.println("The book has been deleted successfully!");
     }
 
+
+    /**
+     * Display owner report
+     * @throws SQLException
+     */
     private void displayReport() throws SQLException {
         Statement stmt = conn.createStatement();
+
     }
 }
