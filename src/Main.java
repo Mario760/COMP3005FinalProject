@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * The type Jdbc.
  */
-public class JDBC {
+public class Main {
     private static Connection conn = null;
     private static final Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 

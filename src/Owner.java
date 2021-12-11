@@ -58,7 +58,7 @@ public class Owner {
         do {
             System.out.println("Enter the ISBN-13 of the new book: ");
             ISBN = scanner.nextLine();
-            if(!JDBC.isNumeric(ISBN) || ISBN.length()!=13) System.out.println("Please check and enter the correct ISBN.");
+            if(!Main.isNumeric(ISBN) || ISBN.length()!=13) System.out.println("Please check and enter the correct ISBN.");
             else break;
         }while(true);
 
@@ -86,7 +86,7 @@ public class Owner {
         do {
             System.out.print("Enter the total pages of the new book (<4 digits): ");
             number_of_pages = scanner.nextLine();
-            if(number_of_pages.length()>4||!JDBC.isNumeric(number_of_pages)){
+            if(number_of_pages.length()>4||!Main.isNumeric(number_of_pages)){
                 System.out.println("Please check and enter the correct pages number.");
             }
             else{
@@ -98,7 +98,7 @@ public class Owner {
         while(true){
             System.out.print("Enter the price of the new book (<4 digits): ");
             price = scanner.nextLine();
-            if(price.length()>4||!JDBC.isNumeric(price)){
+            if(price.length()>4||!Main.isNumeric(price)){
                 System.out.println("Please check and enter the correct price.");
             }
             else{
@@ -110,7 +110,7 @@ public class Owner {
         while (true) {
             System.out.print("How many copies of the new book do you want to add? (<2 digits): ");
             copies_amount = scanner.nextLine();
-            if(copies_amount.length()>2||!JDBC.isNumeric(copies_amount)){
+            if(copies_amount.length()>2||!Main.isNumeric(copies_amount)){
                 System.out.println("Please check and enter the correct copies amount.");
             }
             else{
@@ -122,7 +122,7 @@ public class Owner {
         while(true){
             System.out.print("What is the sale rate of the new book? (0 < rate < 99): ");
             sale_rate = scanner.nextLine();
-            if(sale_rate.length()>2||!JDBC.isNumeric(sale_rate)){
+            if(sale_rate.length()>2||!Main.isNumeric(sale_rate)){
                 System.out.println("Please check and enter the correct sale rate.");
             } else{
                 saleRate = Integer.parseInt(sale_rate);
@@ -161,7 +161,7 @@ public class Owner {
             System.out.print("Please type the new publisher's phone_number' (<20 digits):");
             phone_number = scanner.nextLine();
             if(phone_number.length()>20 || phone_number.length()==0) System.out.println("Input length error, try it again!");
-            else if(!JDBC.isNumeric(phone_number))System.out.println("Error format for phone number, check and try it again!");
+            else if(!Main.isNumeric(phone_number))System.out.println("Error format for phone number, check and try it again!");
             else break;
         }while(true);
 

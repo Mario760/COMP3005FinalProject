@@ -1,7 +1,4 @@
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -197,13 +194,13 @@ public class Customer {
             if (ISBN.equals("END")) {
                 break;
             }
-            if(JDBC.isNumeric(ISBN)) {
+            if(Main.isNumeric(ISBN)) {
                 if(basket.containsKey(ISBN)){
                     int totalCopies = getCopiesAmount(ISBN);
                     while (true) {
                         System.out.println("There are " + totalCopies + " in stock. How many copies do you want?: ");
                         copies = scanner.nextLine();
-                        if (JDBC.isNumeric(copies)) {
+                        if (Main.isNumeric(copies)) {
                             if (Integer.parseInt(copies) <= totalCopies) {
                                 break;
                             } else if (Integer.parseInt(copies) > totalCopies) {
@@ -221,7 +218,7 @@ public class Customer {
                         while (true) {
                             System.out.println("There are " + totalCopies + " in stock. How many copies do you want?: ");
                             copies = scanner.nextLine();
-                            if (JDBC.isNumeric(copies)) {
+                            if (Main.isNumeric(copies)) {
                                 if (Integer.parseInt(copies) <= totalCopies) {
                                     break;
                                 } else if (Integer.parseInt(copies) > totalCopies) {
