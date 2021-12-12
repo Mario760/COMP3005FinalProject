@@ -108,7 +108,7 @@ public class Owner {
         }
 
         while (true) {
-            System.out.print("How many copies of the new book do you want to add? (<2 digits): ");
+            System.out.print("How many copies of the new book do you want to add? (<3 digits): ");
             copies_amount = scanner.nextLine();
             if(copies_amount.length()>2||!Main.isNumeric(copies_amount)){
                 System.out.println("Please check and enter the correct copies amount.");
@@ -131,10 +131,10 @@ public class Owner {
         }
 
         stmt.execute(
-             "insert into book values ('"+ISBN+"','"+name+"','"+author+"','"+genre+"','"+pages+"','"+priceAmount+"','"+saleRate+"');"
+             "insert into book values ('"+ISBN+"','"+name+"','"+author+"','"+genre+"','"+pages+"','"+priceAmount+"');"
         );
         stmt.execute(
-             "insert into book_copies values ('"+ISBN+"','"+copies+"')"
+             "insert into book_copies values ('"+ISBN+"','"+copies+"','"+saleRate+"')"
         );
 
         System.out.println("New book added successfully!");
@@ -155,7 +155,8 @@ public class Owner {
             System.out.print("Please type the new publisher's email (<50 characters):");
             email = scanner.nextLine();
             if(email.length()>50 || email.length()==0) System.out.println("Input length error, try it again!");
-        }while(email.length()<=50 && email.length()>0);
+            else break;
+        }while(true);
 
         do {
             System.out.print("Please type the new publisher's phone_number' (<20 digits):");
@@ -169,7 +170,8 @@ public class Owner {
             System.out.print("Please type the new publisher's banking account'(<20 characters):");
             banking_account = scanner.nextLine();
             if(banking_account.length()>20 || banking_account.length()==0) System.out.println("Input length error, try it again!");
-        }while(banking_account.length()<=20 && banking_account.length()>0);
+            else break;
+        }while(true);
 
         long phoneNumber = Long.valueOf(phone_number);
         stmt.execute(

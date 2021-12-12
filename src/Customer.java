@@ -364,22 +364,26 @@ public class Customer {
         ResultSet rset;
         System.out.println("According to the system, you have the orders below: ");
         rset = stmt.executeQuery(
-                "select * from place_order natural join tracking natural join \"order\""
+                "select * from place_order natural join tracking natural join \"order\" where customer_id = '"+this.id+"'"
         );
 
         while(rset.next()){
-            System.out.print("Order Number: "+rset.getInt("order_number")+"--------");
-            System.out.println("Purcahsed Date: "+rset.getDate("date"));
-            if((date - rset.getDate("date").getDate()) == 1){
-                stmt.execute(
-                        "update tracking set shipping_status = 'Shipped' where order_number = '"+rset.getInt("order_number")+"'"
+            int orderNumber = rset.getInt("order_number");
+            String shipping_status = rset.getString("shipping_status");
+            Date oldDate = rset.getDate("date");
+            Statement tempStatement = conn.createStatement();
+            System.out.print("Order Number: "+orderNumber+"--------");
+            System.out.println("Purcahsed Date: "+ oldDate);
+            if((date - oldDate.getDate()) == 1){
+                tempStatement.execute(
+                        "update tracking set shipping_status = 'Shipped' where order_number = '"+orderNumber+"'"
                 );
-            }else if((date - rset.getDate("date").getDate()) > 1){
-                stmt.execute(
-                        "update tracking set shipping_status = 'Delivered' where order_number = '"+rset.getInt("order_number")+"'"
+            }else if((date - oldDate.getDate()) > 1){
+                tempStatement.execute(
+                        "update tracking set shipping_status = 'Delivered' where order_number = '"+orderNumber+"'"
                 );
             }
-            orderNumberList.put(String.valueOf(rset.getInt("order_number")),rset.getString("shipping_status"));
+            orderNumberList.put(String.valueOf(orderNumber),shipping_status);
         }
 
         while(true) {
