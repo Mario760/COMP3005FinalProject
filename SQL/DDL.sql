@@ -121,13 +121,3 @@ create table publisher_address
 		on delete cascade,
 	 foreign key(postal_code) references address(postal_code)
 	);
-
-create view owner as
-	select id, name, password
-	from "user"
-	where contact_number IS NULL;
-
-create view customer as
-	select *
-	from "user"
-	where contact_number IS NOT NULL;
